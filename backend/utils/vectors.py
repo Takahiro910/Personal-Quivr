@@ -1,4 +1,4 @@
-import os
+import streamlit as st
 from typing import Annotated, List, Tuple
 
 from fastapi import Depends, UploadFile
@@ -13,10 +13,10 @@ from supabase import Client, create_client
 logger = get_logger(__name__)
 
 
-openai_api_key = os.environ.get("OPENAI_API_KEY")
-anthropic_api_key = os.environ.get("ANTHROPIC_API_KEY")
-supabase_url = os.environ.get("SUPABASE_URL")
-supabase_key = os.environ.get("SUPABASE_SERVICE_KEY")
+openai_api_key = st.secrets("OPENAI_API_KEY")
+anthropic_api_key = st.secrets("ANTHROPIC_API_KEY")
+supabase_url = st.secrets("SUPABASE_URL")
+supabase_key = st.secrets("SUPABASE_SERVICE_KEY")
 embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
 supabase_client: Client = create_client(supabase_url, supabase_key)
 documents_vector_store = SupabaseVectorStore(

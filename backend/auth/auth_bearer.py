@@ -1,4 +1,4 @@
-import os
+import streamlit as st
 from typing import Optional
 
 from fastapi import HTTPException, Request
@@ -13,7 +13,7 @@ class JWTBearer(HTTPBearer):
 
     async def __call__(self, request: Request):
         credentials: Optional[HTTPAuthorizationCredentials] = await super().__call__(request)
-        if os.environ.get("AUTHENTICATE") == "false":
+        if st.secrets("AUTHENTICATE") == "false":
             return True
         if credentials:
             if not credentials.scheme == "Bearer":

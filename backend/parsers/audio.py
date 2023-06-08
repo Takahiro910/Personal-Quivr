@@ -1,4 +1,4 @@
-import os
+import streamlit as st
 import tempfile
 import time
 from io import BytesIO
@@ -39,7 +39,7 @@ async def process_audio(upload_file: UploadFile, enable_summarization: bool, use
     file_meta_name = f"audiotranscript_{dateshort}.txt"
     # uploaded file to file object
 
-    openai_api_key = os.environ.get("OPENAI_API_KEY")
+    openai_api_key = st.secrets("OPENAI_API_KEY")
 
     # Here, we're writing the uploaded file to a temporary file, so we can use it with your existing code.
     with tempfile.NamedTemporaryFile(delete=False, suffix=upload_file.filename) as tmp_file:

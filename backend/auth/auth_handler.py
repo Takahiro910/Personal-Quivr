@@ -1,11 +1,11 @@
-import os
+import streamlit as st
 from datetime import datetime, timedelta
 from typing import Optional
 
 from jose import jwt
 from jose.exceptions import JWTError
 
-SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
+SECRET_KEY = st.secrets("JWT_SECRET_KEY")
 ALGORITHM = "HS256"
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):

@@ -1,4 +1,4 @@
-import os
+import streamlit as st
 
 import guidance
 import openai
@@ -7,7 +7,7 @@ from logger import get_logger
 
 logger = get_logger(__name__)
 
-openai_api_key = os.environ.get("OPENAI_API_KEY")
+openai_api_key = st.secrets("OPENAI_API_KEY")
 openai.api_key = openai_api_key
 summary_llm = guidance.llms.OpenAI('gpt-3.5-turbo', caching=False)
 
